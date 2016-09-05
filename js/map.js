@@ -98,6 +98,12 @@ var locations = [
 ];
 
 //*** Octopus
+
+var ViewModel = function (){
+	    var self = this;
+	    this.myLocations = ko.observableArray(locations);    
+	};
+
 	
 	var infoWindow = new google.maps.InfoWindow();
 
