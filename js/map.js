@@ -104,6 +104,8 @@ var ViewModel = function (){
 	    this.myLocations = ko.observableArray(locations);    
 	};
 
+var vm = new ViewModel();
+	ko.applyBindings(vm);
 	
 	var infoWindow = new google.maps.InfoWindow();
 
