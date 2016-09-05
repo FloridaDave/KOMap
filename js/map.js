@@ -96,6 +96,8 @@ var locations = [
 	  'Info': [{'what': 'Recreation','type':'Park'}]
 	}
 ];
+
+//*** Octopus
 	
 	var infoWindow = new google.maps.InfoWindow();
 
