@@ -7,12 +7,6 @@ var markers = [];
 
 // Hard coded locations array for model section
 
-function initMap(){
-	map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: 28.526289, lng: -81.542796},
-		zoom: 13
-	});
-
 	// var locations = [
 	// 	{title: 'Where I live now', location: {lat: 28.526289, lng: -81.542796}},
 	// 	{title: 'Ellie Lou BBQ', location: {lat: 28.531206, lng: -81.539861}},
@@ -104,8 +98,15 @@ var ViewModel = function (){
 	    this.myLocations = ko.observableArray(locations);    
 	};
 
-var vm = new ViewModel();
+	var vm = new ViewModel();
 	ko.applyBindings(vm);
+
+	function initMap(){
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: 28.526289, lng: -81.542796},
+			zoom: 13
+		});
+
 	
 	var infoWindow = new google.maps.InfoWindow();
 
