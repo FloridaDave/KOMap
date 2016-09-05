@@ -5,6 +5,8 @@ var map;
 // Added blank marker array globally 
 var markers = [];
 
+// Hard coded locations array for model section
+
 function initMap(){
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 28.526289, lng: -81.542796},
