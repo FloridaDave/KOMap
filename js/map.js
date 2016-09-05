@@ -1,4 +1,4 @@
-
+//*** Model Section
 					
 var map;
 
