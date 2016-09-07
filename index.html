@@ -32,9 +32,9 @@
 			<section class="row">
 
 			<div class="col-xs-3 col-md-3 text-left data-bind= text: title">
-				<h3 class="col-md-12">Menu</h2>
+				<h3>Menu</h3>
 
-					<span data-bind="text: title"></span>  
+					<!-- <span data-bind="text: title"></span>   -->
 					
 						<!-- <ul> -->
 							
@@ -45,6 +45,12 @@
 							// 	</span> -->
 							
 						<!-- </ul> -->
+
+					<ul data-bind="foreach: myNeighborhood">
+					    <li>
+					        <span data-bind="text: title"> </span>
+					    </li>
+					</ul>
 					
 
 			</div>

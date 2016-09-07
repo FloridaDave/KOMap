@@ -11,28 +11,35 @@ var markers = [];
 
 	// Removed 10 locations to simplify code - NOTE: removed comma from first {}
 
-	// Commented out in stages for testing
-			// var locations = [
-			// 	{ title: "My Home",
-			// 	  // 'lat': 28.526289,
-			// 	  // 'lng': -81.542796,
-			// 	  // 'info': [{'what': 'Home','type':'Apartment'}]
-			// 	}
-			// ];
+
+	
 
 //*** Octopus
 
-function title(title){
-	return {
-		title : ko.observable(title)
-	};
+// var Title = function(title){
+// 		this.title = ko.observable(title);
+// };
 
-}
+// Constructor
 
-var viewModel = {
-	// title:  'My Home'
-	title: ko.observable('My Home')
-	// titles: ko.observableArray([new title("My Home"), new title("Wellsfargo Bank"), new title("Trustco Bank")])
+var Location = function(location){
+		this.title = location.title;
+
+		// this.marker = 
+};
+
+// var viewModel = {
+// 	// title:  'My Home'
+// 	// title: ko.observable('My Home')
+// 	titles: ko.observableArray([new Title("My Home"), new Title("Wellsfargo Bank"), new Title("Trustco Bank")])
+// };
+
+var viewModel = function (){
+	var self = this;
+	self.myNeighborhood = ko.observableArray();
+	locations.forEach(function(location) {
+		self.myNeighborhood.push(new Location(location));
+	});
 };
 
 ko.applyBindings(viewModel);
