@@ -11,27 +11,42 @@ var markers = [];
 
 	// Removed 10 locations to simplify code - NOTE: removed comma from first {}
 
-var locations = [
-	{ 'title': 'Where I Live Now',
-	  'lat': 28.526289,
-	  'lng': -81.542796,
-	  'info': [{'what': 'Home','type':'Apartment'}]
-	}
-];
+	// Commented out in stages for testing
+			// var locations = [
+			// 	{ title: "My Home",
+			// 	  // 'lat': 28.526289,
+			// 	  // 'lng': -81.542796,
+			// 	  // 'info': [{'what': 'Home','type':'Apartment'}]
+			// 	}
+			// ];
 
 //*** Octopus
 
-
-
-
-
-var ViewModel = function (){
-	    var self = this;
-	    this.myLocations = ko.observableArray(locations);    
+function title(title){
+	return {
+		title : ko.observable(title)
 	};
 
-	var vm = new ViewModel();
-	ko.applyBindings(vm);
+}
+
+var viewModel = {
+	// title:  'My Home'
+	title: ko.observable('My Home')
+	// titles: ko.observableArray([new title("My Home"), new title("Wellsfargo Bank"), new title("Trustco Bank")])
+};
+
+ko.applyBindings(viewModel);
+
+
+//*** Below commented out to simiplify
+
+				// var ViewModel = function (){
+				// 	    var self = this;
+				// 	    this.myLocations = ko.observableArray(locations);    
+				// 	};
+
+				// 	var vm = new ViewModel();
+				// 	ko.applyBindings(vm);
 
 	function initMap(){
 		map = new google.maps.Map(document.getElementById('map'), {
@@ -43,48 +58,58 @@ var ViewModel = function (){
 	var infoWindow = new google.maps.InfoWindow();
 
 	// New LatLngBounds instance that captures southwest and northeast corners
-	var bounds = new google.maps.LatLngBounds();
+	//*** Commented out below code to simplify
+				//var bounds = new google.maps.LatLngBounds();
 
 	// This group uses location array to create array of markers on initialize 
-	for (var i = 0; i < locations.length; i++) {
+	
+	//*** Commented out below code to simplify
+				// for (var i = 0; i < locations.length; i++) {
 
-		// Get position from location array
-		var position = locations[i].location;
-		var title = locations[i].title;
+				// 	// Get position from location array
+				// 	var position = locations[i].location;
+				// 	var title = locations[i].title;
 
-		// Create a marker per location, and put into markers array
-		var marker = new google.maps.Marker({
-			map: map,
-			position: position,
-			title: title,
-			animation: google.maps.Animation.DROP,
-			id: i
-		});
+				// 	// Create a marker per location, and put into markers array
+				// 	var marker = new google.maps.Marker({
+				// 		map: map,
+				// 		position: position,
+				// 		title: title,
+				// 		animation: google.maps.Animation.DROP,
+				// 		id: i
+				// 	});
 
 		// Push the marker to our array of markers
-		markers.push(marker);
+
+		//*** Commented out below code to simplify
+				// markers.push(marker);
 
 		//Extend boundaries of map for each marker
-		bounds.extend(marker.position);
+		//*** Commented out below code to simplify
+				// bounds.extend(marker.position);
 
 		// Create an onclick event to open an infowindow at each marker
-		marker.addListener('click', function() { 
-			// populateInfoWindow(this, infoWindow);
-			var marker = this;
-			infoWindow.setContent('<div>' + marker.title + '</div>');
-			infoWindow.open(map, marker);
-		});
+
+		//*** Commented out below code to simplify
+					// marker.addListener('click', function() { 
+					// 	// populateInfoWindow(this, infoWindow);
+					// 	var marker = this;
+					// 	infoWindow.setContent('<div>' + marker.title + '</div>');
+					// 	infoWindow.open(map, marker);
+					// });
 
 		//*** View
 
-		function Places (title, lat, lng)
-		{
-				this.title = title;
-				this.lat = lat;
-				this.lng = lng;
-				this.info = info
 
-		}
+// Commented out my below code
+		// function Places (title, lat, lng)
+		// {
+		// 		this.title = title;
+		// 		this.lat = lat;
+		// 		this.lng = lng;
+		// 		this.info = info
+
+		// }
 
 
 		// This function populates the infowindow when the marker is clicked. Only one window 
@@ -107,10 +132,12 @@ var ViewModel = function (){
 			// }
 
 			// Tells map to fit itself to bounds
-			map.fitBounds(bounds);
+
+			//*** Commented out below code to simplify
+					// map.fitBounds(bounds);
 
 		}
-	}
+	//}
 
 
 					
