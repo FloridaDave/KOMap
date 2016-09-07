@@ -102,10 +102,21 @@ var Location = function(location){
 
 var viewModel = function (){
 	var self = this;
+
 	self.myNeighborhood = ko.observableArray();
 	locations.forEach(function(location) {
 		self.myNeighborhood.push(new Location(location));
 	});
+
+	// self.myNeighborhood().forEach(function(location) {
+ //        marker = new google.map.Marker({
+ //            position: location.latlng,
+ //            map: map,
+ //            title: location.name
+ //        });
+
+ //        markers.push(marker);
+ //    });
 };
 
 ko.applyBindings(viewModel);
