@@ -82,10 +82,6 @@ var locations = [
 
 //*** Octopus
 
-// var Title = function(title){
-// 		this.title = ko.observable(title);
-// };
-
 // Constructor
 
 var Location = function(location){
@@ -94,11 +90,6 @@ var Location = function(location){
 		// this.marker = 
 };
 
-// var viewModel = {
-// 	// title:  'My Home'
-// 	// title: ko.observable('My Home')
-// 	titles: ko.observableArray([new Title("My Home"), new Title("Wellsfargo Bank"), new Title("Trustco Bank")])
-// };
 
 var viewModel = function (){
 	var self = this;
@@ -108,15 +99,6 @@ var viewModel = function (){
 		self.myNeighborhood.push(new Location(location));
 	});
 
-	// self.myNeighborhood().forEach(function(location) {
- //        marker = new google.map.Marker({
- //            position: location.latlng,
- //            map: map,
- //            title: location.name
- //        });
-
- //        markers.push(marker);
- //    });
 };
 
 ko.applyBindings(viewModel);
