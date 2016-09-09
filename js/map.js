@@ -1,15 +1,11 @@
 //*** Model Section
 					
-var map;
+var map; //Creates map variable at global level
 
-// Added blank marker array globally 
-var markers = [];
 
-// Hard coded locations array for model section
+var markers = []; //Added blank marker array globally 
 
-	// KO Array
 
-	// Removed 10 locations to simplify code - NOTE: removed comma from first {}
 
 var locations = [
 	{ 'title': 'Where I Live Now',
@@ -80,16 +76,18 @@ var locations = [
 ];
 	
 
-//*** Octopus
-
 // Constructor
 
 var Location = function(location){
 		this.title = location.title;
+		this.lat = location.lat; // Added for markers
+		this.lng = location.lng; // Added for markers
 
 		// this.marker = 
 };
 
+
+//*** Octopus
 
 var viewModel = function (){
 	var self = this;
@@ -104,6 +102,7 @@ var viewModel = function (){
 ko.applyBindings(viewModel);
 
 
+//*** View
 
 	function initMap(){
 		map = new google.maps.Map(document.getElementById('map'), {
