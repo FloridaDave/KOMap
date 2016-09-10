@@ -2,7 +2,7 @@
 					
 var map; //Creates map variable at global level
 
-
+console.log("11")
 var markers = []; //Added blank marker array globally 
 
 
@@ -99,7 +99,7 @@ var Location = function(location){
 
 
 //*** Octopus
-
+console.log("1");
 var viewModel = function (){
 	var self = this;
 
@@ -107,12 +107,12 @@ var viewModel = function (){
 	locations.forEach(function(location) {
 		self.myNeighborhood.push(new Location(location));
 	});
-
+console.log("2");
 	self.myMarkers = ko.observableArray();
 	markers.forEach(function(markers) {
 		self.myMarkers.push(new Markers(markers));
 	});
-
+console.log("3");
 	var Markers = function(markers){
 		this.latlng = location.latlng;
 	};
@@ -121,7 +121,7 @@ var viewModel = function (){
 
 
 ko.applyBindings(viewModel);
-
+console.log("4");
 
 //*** View
 
@@ -133,7 +133,7 @@ function initMap(){
 
 		for (var i = 0; i < locations.length; i++) {
 
-		var position = locations[i].location; 
+		var position = locations[i].latlng; 
 		var title = locations[i].title; 
 
 		var marker = new google.maps.Marker({
@@ -143,10 +143,10 @@ function initMap(){
 				animation: google.maps.Animation.DROP,
 				id: i
 				});
-
+console.log(marker)
 				markers.push(marker);
 			}
-
+console.log("8");
 		var infoWindow = new google.maps.InfoWindow();
 
 		}
