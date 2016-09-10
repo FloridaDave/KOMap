@@ -95,9 +95,6 @@ var Location = function(location){
 
 		// this.marker = // I know I'll need this with KO but haven't figured out the whole thing. Also tried below:
 
-var Markers = function(markers){
-		this.latlng = location.latlng;
-	};
 };
 
 
@@ -116,6 +113,9 @@ var viewModel = function (){
 		self.myMarkers.push(new Markers(markers));
 	});
 
+	var Markers = function(markers){
+			this.latlng = location.latlng;
+		};
 };
 
 
@@ -126,7 +126,6 @@ ko.applyBindings(viewModel);
 //*** View
 
 function initMap(){
-		console.log("1");
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 28.526289, lng: -81.542796},
 			zoom: 13
@@ -135,7 +134,6 @@ function initMap(){
 		var position = locations.location; 
 		var title = locations.title; 
 
-		console.log("2");
 		var marker = new google.maps.Marker({
 						map: map,
 						position: position,
