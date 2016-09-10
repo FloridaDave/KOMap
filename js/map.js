@@ -145,6 +145,13 @@ function initMap(){
 				});
 
 				markers.push(marker);
+
+				marker.addListener('click', function() { 
+					// populateInfoWindow(this, infoWindow);
+					var marker = this;
+					infoWindow.setContent('<div>' + marker.title + '</div>');
+					infoWindow.open(map, marker);
+		});
 			}
 
 		var infoWindow = new google.maps.InfoWindow();
