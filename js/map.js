@@ -6,72 +6,82 @@ var map; //Creates map variable at global level
 var markers = []; //Added blank marker array globally 
 
 
-
 var locations = [
 	{ 'title': 'Where I Live Now',
-	  'lat': 28.526289,
-	  'lng': -81.542796,
-	  'Info': [{'what': 'Home','type':'Apartment'}]
+	  'latlng': {'lat': 28.526289, 'lng': -81.542796},
+	  // 'lat': 28.526289,
+	  // 'lng': -81.542796,
+	  // 'Info': [{'what': 'Home','type':'Apartment'}]
 	},
 
 	{ 'title': 'Ellie Lou BBQ',
-	  'lat': 28.531206,
-	  'lng': -81.539861,
-	  'Info': [{'what': 'Restaurant','type':'BBQ'}]
+	  'latlng': {'lat': 28.531206, 'lng': -81.539861},
+	  // 'lat': 28.531206,
+	  // 'lng': -81.539861,
+	  // 'Info': [{'what': 'Restaurant','type':'BBQ'}]
 	},
 
 	{ 'title': 'Pho-Real',
-	  'lat': 28.529005,
-	  'lng': -81.541229,
-	  'Info': [{'what': 'Restaurant','type':'Vietnamese'}]
+	  'latlng': {'lat': 28.529005, 'lng': -81.541229},
+	  // 'lat': 28.529005,
+	  // 'lng': -81.541229,
+	  // 'Info': [{'what': 'Restaurant','type':'Vietnamese'}]
 	},
 
 	{ 'title': 'Keke Breakfast Cafe',
-	  'lat': 28.529887,
-	  'lng': -81.540118,
-	  'Info': [{'what': 'Restaurant','type':'Breakfast'}]
+	  'latlng': {'lat': 28.529887, 'lng': -81.540118},
+	  // 'lat': 28.529887,
+	  // 'lng': -81.540118,
+	  // 'Info': [{'what': 'Restaurant','type':'Breakfast'}]
 	},
 
 	{ 'title': 'Wells Fargo Bank',
-	  'lat': 28.532100,
-	  'lng': -81.541391,
-	  'Info': [{'what': 'Bank','type':'Branch Office'}]
+	  'latlng': {'lat': 28.532100, 'lng': -81.541391},
+	  // 'lat': 28.532100,
+	  // 'lng': -81.541391,
+	  // 'Info': [{'what': 'Bank','type':'Branch Office'}]
 	},
 
 	{ 'title': 'Trustco Bank',
-	  'lat': 28.528313,
-	  'lng': -81.542554,
-	  'Info': [{'what': 'Bank','type':'Branch Office'}]
+	  'latlng': {'lat': 28.528313, 'lng': -81.542554},
+	  // 'lat': 28.528313,
+	  // 'lng': -81.542554,
+	  // 'Info': [{'what': 'Bank','type':'Branch Office'}]
 	},
 
 	{ 'title': 'West Orange 5 Theater',
-	  'lat': 28.548660,
-	  'lng': -81.542499,
-	  'Info': [{'what': 'Entertainment','type':'Movie Theater'}]
+	  'latlng': {'lat': 28.548660, 'lng': -81.542499},
+	  // 'lat': 28.548660,
+	  // 'lng': -81.542499,
+	  // 'Info': [{'what': 'Entertainment','type':'Movie Theater'}]
 	},
 
 	{ 'title': 'AMC West Theater',
-	  'lat': 28.551897,
-	  'lng': -81.515219,
-	  'Info': [{'what': 'Entertainment','type':'Movie Theater'}]
+	  'latlng': {'lat': 28.551897, 'lng': -81.515219},
+	  // 'lat': 28.551897,
+	  // 'lng': -81.515219,
+	  // 'Info': [{'what': 'Entertainment','type':'Movie Theater'}]
 	},
 
 	{ 'title': 'George Bailey Park',
-	  'lat': 28.528546,
-	  'lng': -81.556786,
-	  'Info': [{'what': 'Recreation','type':'Park'}]
+	  'latlng': {'lat': 28.551897, 'lng': -81.556786},
+	  // 'lat': 28.551897,
+	  // 'lng': -81.556786,
+	  // 'Info': [{'what': 'Recreation','type':'Park'}]
 	},
 
 	{ 'title': 'West Orange Dog Park',
-	  'lat': 28.543861,
-	  'lng': -81.564208,
-	  'Info': [{'what': 'Recreation','type':'Park'}]
+	  'latlng': {'lat': 28.543861, 'lng': -81.564208},
+	  // 'lat': 28.543861,
+	  // 'lng': -81.564208,
+	  // 'Info': [{'what': 'Recreation','type':'Park'}]
 	},
 
 	{ 'title': 'Butler Bay Recreation Area',
-	  'lat': 28.505466,
-	  'lng': -81.551895,
-	  'Info': [{'what': 'Recreation','type':'Park'}]
+	  'latlng': {'lat': 28.505466, 'lng': -81.551895},
+	  // 'lat': 28.505466,
+	  // 'lng': -81.551895,
+	  // 'Info': [{'what': 'Recreation','type':'Park'}]
 	}
 ];
 	
@@ -80,10 +90,14 @@ var locations = [
 
 var Location = function(location){
 		this.title = location.title;
-		this.lat = location.lat; // Added for markers
-		this.lng = location.lng; // Added for markers
+		// this.lat = location.lat; // Added for markers with KO
+		// this.lng = location.lng; // Added for markers with KO
 
-		// this.marker = 
+		// this.marker = // I know I'll need this with KO but haven't figured out the whole thing. Also tried below:
+
+var Markers = function(markers){
+		this.latlng = location.latlng;
+	};
 };
 
 
@@ -97,24 +111,46 @@ var viewModel = function (){
 		self.myNeighborhood.push(new Location(location));
 	});
 
+	self.myMarkers = ko.observableArray();
+	markers.forEach(function(markers) {
+		self.myMarkers.push(new Markers(markers));
+	});
+
 };
+
+
 
 ko.applyBindings(viewModel);
 
 
 //*** View
 
-	function initMap(){
+function initMap(){
+		console.log("1");
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 28.526289, lng: -81.542796},
 			zoom: 13
 		});
 
-	
-	var infoWindow = new google.maps.InfoWindow();
+		var position = locations.location; 
+		var title = locations.title; 
+
+		console.log("2");
+		var marker = new google.maps.Marker({
+						map: map,
+						position: position,
+						title: title,
+						animation: google.maps.Animation.DROP,
+					});
+		var infoWindow = new google.maps.InfoWindow();
 
 		}
+	
+	
+	
+	
 
+		 	
 
 
 					
