@@ -90,10 +90,6 @@ var locations = [
 
 var Location = function(location){
 		this.title = location.title;
-		// this.lat = location.lat; // Added for markers with KO
-		// this.lng = location.lng; // Added for markers with KO
-
-		// this.marker = // I know I'll need this with KO but haven't figured out the whole thing. Also tried below:
 
 };
 
