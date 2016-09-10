@@ -114,8 +114,8 @@ var viewModel = function (){
 	});
 
 	var Markers = function(markers){
-			this.latlng = location.latlng;
-		};
+		this.latlng = location.latlng;
+	};
 };
 
 
@@ -131,15 +131,22 @@ function initMap(){
 			zoom: 13
 		});
 
-		var position = locations.location; 
-		var title = locations.title; 
+		for (var i = 0; i < locations.length; i++) {
+
+		var position = locations[i].location; 
+		var title = locations[i].title; 
 
 		var marker = new google.maps.Marker({
-						map: map,
-						position: position,
-						title: title,
-						animation: google.maps.Animation.DROP,
-					});
+				map: map,
+				position: position,
+				title: title,
+				animation: google.maps.Animation.DROP,
+				id: i
+				});
+
+				markers.push(marker);
+			}
+
 		var infoWindow = new google.maps.InfoWindow();
 
 		}
