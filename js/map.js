@@ -90,6 +90,7 @@ var viewModel = function (){
 	self.myNeighborhood = ko.observableArray();
 	locations.forEach(function(location) {
 		self.myNeighborhood.push(new Location(location));
+
 	});
 
 	self.myMarkers = ko.observableArray();
@@ -140,7 +141,7 @@ function initMap(){
 					infoWindow.setContent('<div>' + marker.title + '</div>');
 					infoWindow.open(map, marker);
 					this.setAnimation(google.maps.Animation.BOUNCE);
-						setTimeout(function(){ marker.setAnimation(null); }, 2100);
+						setTimeout(function(){ marker.setAnimation(null); }, 1420);
 					
 		});
 			}
