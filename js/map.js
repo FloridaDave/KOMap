@@ -1,12 +1,12 @@
 //*** Model Section
 					
 var map; //Creates map variable at global level
-
-
+var infoWindow;
 var markers = []; //Added blank marker array globally 
+var myViewModel;
 
-
-var locations = [
+// Define hardcoded array of location objects
+var locations = [ 	
 	{ 'title': 'Where I Live Now',
 	  'latlng': {'lat': 28.526289, 'lng': -81.542796},
 	  'Info': 'Casa Mirella Apartments',
@@ -76,53 +76,37 @@ var locations = [
 ];
 	
 
-// Constructor
+// Location Constructor
 
-var Location = function(location){
+var Location = function(location, i){
 		this.title = location.title;
+		this.marker = markers[i];
+
 };
 
 
-//*** Octopus
+//*** Octopus/Constructor
 
 
-var viewModel = function (){
+
+var ViewModel = function (){
 	var self = this;
 
 	self.myNeighborhood = ko.observableArray();
-	locations.forEach(function(location) {
-		self.myNeighborhood.push(new Location(location));
-
-		// I feel like I want to use array ID numbers 0-11 to connect to the related marker popups 
-		//  with click listener (id: i). Also feel like I should use something like: this.goToMarker. 
-		// I think the click event listener needs to be tied to menu items when created... 
-
-			// navMarker.addListener('click', function() {
-				// var navMarker = this;
-					// infoWindow.setContent('<div text-left>' + marker.title + '</div>');
-					// infoWindow.open(map, marker);
-				// });
-
-		// Or maybe the click event needs to be in the html page as a <script> where the menu items are generated, 
-		// maybe that's a better way of trying to connect back to the markers popups and animations??
+	locations.forEach(function(location, i) {
+		self.myNeighborhood.push(new Location(location, i));
 
 	});
 
-	self.myMarkers = ko.observableArray();
-	markers.forEach(function(markers) {
-		self.myMarkers.push(new Markers(markers));
-
-	});
-
-	var Markers = function(markers){
-		this.latlng = location.latlng;
+	self.triggerMarker = function(location){
+		var marker = location.marker;
+		console.log("clicked:", location);
+		google.maps.event.trigger( marker, 'click' );
 	};
 
 };
 
 
-
-ko.applyBindings(viewModel);
 
 
 //*** View
@@ -146,7 +130,7 @@ function initMap(){
 				position: position,
 				title: title,
 				animation: google.maps.Animation.DROP,
-				id: i,
+				id: i,  // Index to relate markers to locations
 				icon: image
 				});
 
@@ -164,7 +148,11 @@ function initMap(){
 		});
 			}
 
-		var infoWindow = new google.maps.InfoWindow();
+		infoWindow = new google.maps.InfoWindow();
+
+		myViewModel = new ViewModel();
+
+		ko.applyBindings(myViewModel);
 
 		}
 	
