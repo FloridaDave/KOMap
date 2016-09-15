@@ -98,8 +98,23 @@ var ViewModel = function (){
 
 	});
 
+
+//filter the items using the filter text
+	// viewModel.filteredItems = ko.computed(function() {
+ //    	var filter = this.filter().toLowerCase();
+	//     if (!filter) {
+	//         return this.items();
+	//     } else {
+	//         return ko.utils.arrayFilter(this.items(), function(item) {
+	//             return ko.utils.stringStartsWith(item.name().toLowerCase(), filter);
+	//         });
+	//     }
+	// }, viewModel);
+	
+
+
 	self.triggerMarker = function(location){
-		var marker = location.marker;
+		var marker = location.marker;  
 		console.log("clicked:", location);
 		google.maps.event.trigger( marker, 'click' );
 	};
