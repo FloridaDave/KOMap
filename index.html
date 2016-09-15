@@ -37,6 +37,13 @@
 
 				<h5>Search: <input data-bind=""/></h5>  
 
+				<script type="text/javascript">
+
+				</script>
+
+				<textarea id="ta" onKeyUp="clean(ta)" onKeyDown="clean(ta)"></textarea>
+
+
 					<ul data-bind="foreach: myNeighborhood">
 					    <li>
 					        <span data-bind="text: title, click: $root.triggerMarker"> </span>
