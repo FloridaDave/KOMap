@@ -7,7 +7,7 @@ var r = JSON.parse(weather.response);
 
 var weather = r.current_observation.weather + "";
 var temp = r.current_observation.temp_f + "";
-var wind = r.current_observation.wind_string + "";
+var wind = r.current_observation.wind_mph + "";
 var humidity = r.current_observation.relative_humidity + "";
 
 function getWeather(id,res) {

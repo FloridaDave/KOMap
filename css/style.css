@@ -52,6 +52,13 @@ body {
 	max-height: 110px;
 }
 
+.uw-logo {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	max-width: 40px;
+	max-height: 20px;
+}
+
 hr {
     border: none;
     height: 2px;
