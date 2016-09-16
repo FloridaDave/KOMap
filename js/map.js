@@ -110,7 +110,7 @@ var ViewModel = function (){
 	//         });
 	//     }
 	// }, viewModel);
-	
+
 
 
 	self.triggerMarker = function(location){
@@ -154,7 +154,8 @@ function initMap(){
 				marker.addListener('click', function() { 
 					// populateInfoWindow(this, infoWindow);
 					var marker = this;
-					infoWindow.setContent('<div align="left">' + marker.title + '</div>');
+					infoWindow.setContent(
+						'<div>' + marker.title + '</div>');
 					infoWindow.open(map, marker);
 					this.setAnimation(google.maps.Animation.BOUNCE);
 						setTimeout(function(){ marker.setAnimation(null); }, 1420);
