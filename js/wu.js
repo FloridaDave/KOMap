@@ -1,5 +1,5 @@
 var weather = new XMLHttpRequest();
-weather.open("GET", "http://api.wunderground.com/api/5b0c540c3c6e4cb7/conditions/q/FL/Windermere.json", false);
+weather.open("GET", "https://api.wunderground.com/api/5b0c540c3c6e4cb7/conditions/q/FL/Windermere.json", false);
 weather.send(null);
 
 var r = JSON.parse(weather.response);
