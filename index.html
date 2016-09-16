@@ -6,9 +6,9 @@
 		<Meta http-equiv="X-UA-compatible" content="IE=edge">
 		<title>Map Project</title>
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,100" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="css/iw.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/iw.css">
 		
 	</head>
 	<body>
@@ -33,7 +33,7 @@
 			<section class="row">
 
 			<div class="col-xs-3 col-md-3 text-left data-bind= text: title">
-				<h3>My Neighborhood</h3>
+				<h4><font face="arial" weight="bold">My Neighborhood</font></h4>
 
 				<h5>Search: <input data-bind=""/></h5>  
 
@@ -41,9 +41,7 @@
 					    <li>
 					        <span onmouseover="style.color='red'" onmouseout="style.color='black'" data-bind="text: title, click: $root.triggerMarker"> </span>
 					    </li>
-					</ul> 
-					
-
+					</ul> 		
 			</div>
 			
 				<div class="text-right col-md-9" id="map">
@@ -69,6 +67,7 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
 		<script src="js/map.js"></script>
+		<script src="js/wu.js"></script>
 		<script async 
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwRvYwUm90Kd_8KXG6M1ET5Sbrmk3-6aM&v=3&callback=initMap">
 			</script>
