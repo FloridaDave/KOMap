@@ -115,7 +115,7 @@ var ViewModel = function (){
 			});
 		}
 	});
-	
+
 
 	self.triggerMarker = function(location){
 		var marker = location.marker;  
@@ -124,9 +124,6 @@ var ViewModel = function (){
 	};
 
 };
-
-
-
 
 //*** View
 
@@ -142,12 +139,14 @@ function initMap(){
 
 		var position = locations[i].latlng; 
 		var title = locations[i].title; 
+		var info = locations[i].info;  // Added trying to get info to appear in infoWindow
 		var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
 		var marker = new google.maps.Marker({
 				map: map,
 				position: position,
 				title: title,
+				info: info,  //added to get info to appear in infoWindow
 				animation: google.maps.Animation.DROP,
 				id: i,  // Index to relate markers to locations
 				icon: image
@@ -159,7 +158,7 @@ function initMap(){
 					// populateInfoWindow(this, infoWindow);
 					var marker = this;
 					infoWindow.setContent(
-						'<div>' + marker.title + '<br>' + marker.info + '</div>');
+						'<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>');
 					infoWindow.open(map, marker);
 					this.setAnimation(google.maps.Animation.BOUNCE);
 						setTimeout(function(){ marker.setAnimation(null); }, 1420);
