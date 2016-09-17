@@ -92,6 +92,8 @@ var Location = function(location, i){
 var ViewModel = function (){
 	var self = this;
 
+	self.userInput = ko.observable('');
+
 	self.myNeighborhood = ko.observableArray();
 	locations.forEach(function(location, i) {
 		self.myNeighborhood.push(new Location(location, i));
@@ -99,8 +101,22 @@ var ViewModel = function (){
 	});
 
 
-//filter the items using the filter text
-	// viewModel.filteredItems = ko.computed(function() {
+// filter the items using the filter text
+	self.filteredList = ko.computed(function() {
+		// make filter functionality case insensitive
+		var filter = self.userInput().toLowerCase();
+		console.log(filter);
+		// Return value of filteredItems computed observiable
+		if (!filter) {
+			return self.myNeighborhood();
+		} else {
+			return ko.utils.arrayFilter(self.myNeighborhood(), function(place) {
+				var title = place.title.toLowerCase();
+	            return title.indexOf(filter) !== -1;
+			});
+		}
+	});
+
  //    	var filter = this.filter().toLowerCase();
 	//     if (!filter) {
 	//         return this.items();
@@ -171,6 +187,8 @@ function initMap(){
 		ko.applyBindings(myViewModel);
 
 		}
+
+
 	
 	
 	

@@ -35,9 +35,9 @@
 			<div class="col-xs-3 col-md-3 text-left data-bind= text: title">
 				<h4><font face="arial" weight="bold">My Neighborhood</font></h4>
 
-				<h5>Search: <input data-bind=""/></h5>  
+				<h5>Search: <input data-bind="textInput: userInput" /></h5>
 
-					<ul data-bind="foreach: myNeighborhood">
+					<ul data-bind="foreach: filteredList">
 					    <li>
 					        <span onmouseover="style.color='red'" onmouseout="style.color='black'" data-bind="text: title, click: $root.triggerMarker"> </span>
 					    </li>
@@ -55,7 +55,7 @@
 					<h6><em>Courtesy Weather Underground</h6>
 			</div>
 			
-				<div class="text-right col-md-9" id="map">
+				<div class="col-md-9" id="map">
 					   
 			</div>
 
