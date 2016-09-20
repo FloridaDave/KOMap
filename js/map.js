@@ -1,11 +1,11 @@
-//*** Model Section
+//*** Model Section ***
 					
 var map; //Creates map variable at global level
-var infoWindow;
+var infoWindow; // Creates infoWindow variable at global level
 var markers = []; //Added blank marker array globally 
-var myViewModel;
+var myViewModel; // Creates myViewModel variable at global level
 
-// Define hardcoded array of location objects
+// Defines hardcoded array of location objects
 var locations = [ 	
 	{ 'title': 'Where I Live Now',
 	  'latlng': {'lat': 28.526289, 'lng': -81.542796},
@@ -84,12 +84,13 @@ var Location = function(location, i){
 };
 
 
-//*** Octopus/Constructor
 
+//*** Viewmodel Section ***
 
+// Location Menu Constructor
 
 var ViewModel = function (){
-	var self = this;
+	var self = this; 
 
 	self.userInput = ko.observable('');
 
@@ -100,12 +101,13 @@ var ViewModel = function (){
 	});
 
 
-// filter the items using the filter text
+// Filter items using the filter text (returns matching subset of original array)
+
 	self.filteredList = ko.computed(function() {
 		// make filter functionality case insensitive
 		var filter = self.userInput().toLowerCase();
 		console.log(filter);
-		// Return value of filteredItems computed observiable
+		// Returns value of filtered items computed observiable
 		if (!filter) {
 			return self.myNeighborhood();
 		} else {
@@ -117,6 +119,8 @@ var ViewModel = function (){
 	});
 
 
+// Connects location menu list to coorosponding markers evoking actions when triggered with click. 
+
 	self.triggerMarker = function(location){
 		var marker = location.marker;  
 		console.log("clicked:", location);
@@ -125,7 +129,10 @@ var ViewModel = function (){
 
 };
 
-//*** View
+
+// *** View Section ***
+
+// Creates map 
 
 function initMap(){
 		map = new google.maps.Map(document.getElementById('map'), {
@@ -133,45 +140,46 @@ function initMap(){
 			zoom: 13
 		});
 
-		var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+// Loops through array to create and place map icons
 
 		for (var i = 0; i < locations.length; i++) {
 
 		var position = locations[i].latlng; 
 		var title = locations[i].title; 
-		var info = locations[i].info;  // Added trying to get info to appear in infoWindow
+		var info = locations[i].info;  // Used to get info to appear in infoWindow 
+		// var image creates variable to connect use of beachflag graphic as map icon (see icon: image below)
 		var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
 		var marker = new google.maps.Marker({
 				map: map,
 				position: position,
 				title: title,
-				info: info,  //added to get info to appear in infoWindow
+				info: info,  //Used to get info to appear in infoWindow
 				animation: google.maps.Animation.DROP,
 				id: i,  // Index to relate markers to locations
-				icon: image
+				icon: image // Sets icons used to var image (beachflag in this case)
 				});
 
-				markers.push(marker);
+				markers.push(marker); // Populates marker icons on map
 
+				// Sets infoWindow to appear when map icon or location list menu item clicked
 				marker.addListener('click', function() { 
-					// populateInfoWindow(this, infoWindow);
 					var marker = this;
-					infoWindow.setContent(
-						'<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>');
-					infoWindow.open(map, marker);
-					this.setAnimation(google.maps.Animation.BOUNCE);
-						setTimeout(function(){ marker.setAnimation(null); }, 1420);
+					infoWindow.setContent(  //Defines content in infoWindow using code in line below
+						'<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>'); 
+					infoWindow.open(map, marker); // infoWindow open method
+					this.setAnimation(google.maps.Animation.BOUNCE); // Sets icon bounce animation
+						setTimeout(function(){ marker.setAnimation(null); }, 1420); // Sets marker animation timeout - 1420 is 2 bounces
 
 					
 		});
 			}
 
-		infoWindow = new google.maps.InfoWindow();
+		infoWindow = new google.maps.InfoWindow(); // Creates new map infoWindows method
 
-		myViewModel = new ViewModel();
+		myViewModel = new ViewModel(); // Creates new ViewModel method
 
-		ko.applyBindings(myViewModel);
+		ko.applyBindings(myViewModel);  // Evokes functional use of knockout JS to KO commands
 
 		}
 
