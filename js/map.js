@@ -109,7 +109,6 @@ var ViewModel = function (){
 	self.filteredList = ko.computed(function() {
 		// make filter functionality case insensitive
 		var filter = self.userInput().toLowerCase();
-		console.log(filter);
 		// Returns value of filtered items computed observiable
 		if (!filter) {
 			// PER SPECFICATION: Shows all markers when no user input
@@ -139,7 +138,6 @@ var ViewModel = function (){
 
 	self.triggerMarker = function(location){
 		var marker = location.marker;  
-		console.log("clicked:", location);
 		google.maps.event.trigger( marker, 'click' );
 	};
 

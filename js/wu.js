@@ -1,5 +1,6 @@
 // Code used to get 3rd party API informaiton (Weather Underground)
-// Foundation for code off youtube video (can't findj or remember source). 
+// Foundation for code off youtube video (can't find or remember source -
+// had to reboot computer and lost video URL). Customized the data pulled though. 
 
 var weather = new XMLHttpRequest();
 weather.open("GET", "https://api.wunderground.com/api/5b0c540c3c6e4cb7/conditions/q/FL/Windermere.json", false);
