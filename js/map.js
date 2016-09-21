@@ -5,7 +5,7 @@ var infoWindow; // Creates infoWindow variable at global level
 var markers = []; //Added blank marker array globally 
 var myViewModel; // Creates myViewModel variable at global level
 
-// Defines hardcoded array of location objects
+// PER SPECFICATION: Defines hardcoded array of location objects (at least 5). 
 // Locations chosen from places near where I live and used latlng converter at:
 // http://www.latlong.net/convert-address-to-lat-long.html
 
@@ -89,7 +89,7 @@ var Location = function(location, i){
 
 //*** Viewmodel & Views Section ***
 
-// Location Menu Constructor
+// PER SPECFICATION: Location Menu Constructor
 
 var ViewModel = function (){
 	var self = this; 
@@ -102,8 +102,8 @@ var ViewModel = function (){
 });
 
 
-// Filter items using the filter text (returns matching subset of original array) and connects to markers 
-// allowing them to be seen or hidden dynamically based on input in the text field.
+// PER SPECFICATION: Filter items using the filter text (returns matching subset of original array) and 
+// connects to markers allowing them to be seen or hidden dynamically based on input in the text field.
 // Filtering code example from: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
 
 	self.filteredList = ko.computed(function() {
@@ -112,11 +112,11 @@ var ViewModel = function (){
 		console.log(filter);
 		// Returns value of filtered items computed observiable
 		if (!filter) {
-			// Creates subset array of markers aligned with locations list
+			// PER SPECFICATION: Creates subset array of markers aligned with locations list
 			self.myNeighborhood().forEach(function(place) {  
 				place.marker.setVisible(true);
 			});
-			// Returns subset of locations based on userInput filter
+			// PER SPECFICATION: Returns subset of locations based on userInput filter
 			return self.myNeighborhood();
 		} else {
 			return ko.utils.arrayFilter(self.myNeighborhood(), function(place) {
@@ -154,7 +154,7 @@ function initMap(){
 			zoom: 13  // Sets initial zoom level when the map first appears. 
 		});
 
-// Loops through array to create and place map icons
+// PER SPECFICATION: Loops through array to create and place map icons
 
 		for (var i = 0; i < locations.length; i++) {
 
@@ -176,13 +176,13 @@ function initMap(){
 
 				markers.push(marker); // Populates marker icons on map
 
-				// Sets infoWindow to appear when map icon or location list menu item clicked
+				// PER SPECFICATION: Sets infoWindow to appear when map icon or location list menu item clicked
 				marker.addListener('click', function() { 
 					var marker = this;
 					infoWindow.setContent(  //Defines content in infoWindow using code in line below
 						'<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>'); 
 					infoWindow.open(map, marker); // infoWindow open method
-					this.setAnimation(google.maps.Animation.BOUNCE); // Sets icon bounce animation
+					this.setAnimation(google.maps.Animation.BOUNCE); // PER SPECFICATION: Sets icon bounce animation
 						setTimeout(function(){ marker.setAnimation(null); }, 1420); // Sets marker animation timeout - 1420 is 2 bounces
 				
 			});
