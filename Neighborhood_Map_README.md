@@ -21,3 +21,6 @@ Once the game opens in your browser, you're ready to start using it. Options for
 
 Also, don't forget to checkout the weather information. 
 
+*** Note: Most of the JS code is in the map.js file. The 3rd party API code (Weather Underground for weather info) is 
+in the wu.js file. 
+
