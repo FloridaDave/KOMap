@@ -106,6 +106,7 @@ var ViewModel = function (){
 
 // Filter items using the filter text (returns matching subset of original array) and connects to markers 
 // allowing them to be seen or hidden dynamically based on input in the text field.
+// Filtering code example from: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
 
 	self.filteredList = ko.computed(function() {
 		// make filter functionality case insensitive
@@ -123,7 +124,7 @@ var ViewModel = function (){
 			return ko.utils.arrayFilter(self.myNeighborhood(), function(place) {
 				var title = place.title.toLowerCase();
 				var marker = place.marker; 
-				var match = title.indexOf(filter) !== -1;
+				var match = title.indexOf(filter) !== -1; 
 				if (!match) {
 					marker.setVisible(false); // Sets markers not in subset to be hidden
 				} else {
@@ -136,6 +137,7 @@ var ViewModel = function (){
 
 
 // Connects location menu list to coorosponding markers evoking actions when triggered with click. 
+// Examples of click binding from: http://knockoutjs.com/documentation/click-binding.html
 
 	self.triggerMarker = function(location){
 		var marker = location.marker;  
@@ -146,14 +148,12 @@ var ViewModel = function (){
 };
 
 
-// *** View Section ***
-
 // Creates map 
 
 function initMap(){
-		map = new google.maps.Map(document.getElementById('map'), {
-			center: {lat: 28.526289, lng: -81.542796},
-			zoom: 13
+		map = new google.maps.Map(document.getElementById('map'), {  // Code to get map to appear
+			center: {lat: 28.526289, lng: -81.542796}, // Sets location for center of map in DOM
+			zoom: 13  // Sets initial zoom level when the map first appears. 
 		});
 
 // Loops through array to create and place map icons
@@ -171,7 +171,7 @@ function initMap(){
 				position: position,
 				title: title,
 				info: info,  //Used to get info to appear in infoWindow
-				animation: google.maps.Animation.DROP,
+				animation: google.maps.Animation.DROP, // Used to make markers drop from the top of the screen
 				id: i,  // Index to relate markers to locations
 				icon: image // Sets icons used to var image (beachflag in this case)
 				});
