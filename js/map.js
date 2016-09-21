@@ -6,6 +6,9 @@ var markers = []; //Added blank marker array globally
 var myViewModel; // Creates myViewModel variable at global level
 
 // Defines hardcoded array of location objects
+// Locations chosen from places near where I live and used latlng converter at:
+// http://www.latlong.net/convert-address-to-lat-long.html
+
 var locations = [ 	
 	{ 'title': 'Where I Live Now',
 	  'latlng': {'lat': 28.526289, 'lng': -81.542796},
@@ -75,7 +78,7 @@ var locations = [
 ];
 	
 
-// Location Constructor
+// Location Constructor  *** CAD credit training
 
 var Location = function(location, i){
 		this.title = location.title;
@@ -101,7 +104,8 @@ var ViewModel = function (){
 	});
 
 
-// Filter items using the filter text (returns matching subset of original array)
+// Filter items using the filter text (returns matching subset of original array) and connects to markers 
+// allowing them to be seen or hidden dynamically based on input in the text field.
 
 	self.filteredList = ko.computed(function() {
 		// make filter functionality case insensitive
@@ -109,11 +113,23 @@ var ViewModel = function (){
 		console.log(filter);
 		// Returns value of filtered items computed observiable
 		if (!filter) {
+			// Creates subset array of markers aligned with locations list
+			self.myNeighborhood().forEach(function(place) {  
+				place.marker.setVisible(true);
+			});
+			// Returns subset of locations based on userInput filter
 			return self.myNeighborhood();
 		} else {
 			return ko.utils.arrayFilter(self.myNeighborhood(), function(place) {
 				var title = place.title.toLowerCase();
-	            return title.indexOf(filter) !== -1;
+				var marker = place.marker; 
+				var match = title.indexOf(filter) !== -1;
+				if (!match) {
+					marker.setVisible(false); // Sets markers not in subset to be hidden
+				} else {
+					marker.setVisible(true); // Sets markers in subset to be seen
+				}
+	            return match;
 			});
 		}
 	});
