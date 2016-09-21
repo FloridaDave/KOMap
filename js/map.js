@@ -140,7 +140,6 @@ var ViewModel = function (){
 		var marker = location.marker;  
 		google.maps.event.trigger( marker, 'click' );
 	};
-
 };
 
 
