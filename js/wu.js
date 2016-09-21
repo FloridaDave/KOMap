@@ -1,4 +1,5 @@
 // Code used to get 3rd party API informaiton (Weather Underground)
+// Foundation for code off youtube video (can't findj or remember source). 
 
 var weather = new XMLHttpRequest();
 weather.open("GET", "https://api.wunderground.com/api/5b0c540c3c6e4cb7/conditions/q/FL/Windermere.json", false);
@@ -15,6 +16,8 @@ var humidity = r.current_observation.relative_humidity + "";
 // Function to get weather data elements
 
 function getWeather(id,res) {
+  // Did not use KO for DOM manipulation because only 
+  // inserted once - does not need to be observable
   document.getElementById(id).innerHTML=res;
 }
 

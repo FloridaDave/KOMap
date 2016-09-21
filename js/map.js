@@ -78,17 +78,17 @@ var locations = [
 ];
 	
 
-// Location Constructor  *** CAD credit training
+// Location Constructor  *** Info from Udacity training:
+// https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/271165859175461/lessons/3406489055/concepts/34284402380923
 
 var Location = function(location, i){
-		this.title = location.title;
-		this.marker = markers[i];
+	this.title = location.title;
+	this.marker = markers[i];
 };
 
 
 
-//*** Viewmodel & Views Section ***
-
+//*** ViewModel & Views Section ***
 // PER SPECFICATION: Location Menu Constructor
 
 var ViewModel = function (){
@@ -112,17 +112,17 @@ var ViewModel = function (){
 		console.log(filter);
 		// Returns value of filtered items computed observiable
 		if (!filter) {
-			// PER SPECFICATION: Creates subset array of markers aligned with locations list
+			// PER SPECFICATION: Shows all markers when no user input
 			self.myNeighborhood().forEach(function(place) {  
 				place.marker.setVisible(true);
 			});
-			// PER SPECFICATION: Returns subset of locations based on userInput filter
+			// PER SPECFICATION: Returns all locations based on userInput filter
 			return self.myNeighborhood();
-		} else {
+		} else {  // Returns matching subset of locations
 			return ko.utils.arrayFilter(self.myNeighborhood(), function(place) {
 				var title = place.title.toLowerCase();
 				var marker = place.marker; 
-				var match = title.indexOf(filter) !== -1; 
+				var match = title.indexOf(filter) !== -1; // Determines match (true/false)
 				if (!match) {
 					marker.setVisible(false); // Sets markers not in subset to be hidden
 				} else {
@@ -134,7 +134,7 @@ var ViewModel = function (){
 	});
 
 
-// Connects location menu list to coorosponding markers evoking actions when triggered with click. 
+// Synchronizes location menu list to coorosponding markers evoking actions when triggered with click. 
 // Examples of click binding from: http://knockoutjs.com/documentation/click-binding.html
 
 	self.triggerMarker = function(location){
@@ -158,43 +158,38 @@ function initMap(){
 
 		for (var i = 0; i < locations.length; i++) {
 
-		var position = locations[i].latlng; 
-		var title = locations[i].title; 
-		var info = locations[i].info;  // Used to get info to appear in infoWindow 
-		// var image creates variable to connect use of beachflag graphic as map icon (see icon: image below)
-		var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+			var position = locations[i].latlng; 
+			var title = locations[i].title; 
+			var info = locations[i].info;  // Used to get info to appear in infoWindow 
+			// var image creates variable to connect use of beachflag graphic as map icon (see icon: image below)
+			var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
-		var marker = new google.maps.Marker({
-				map: map,
-				position: position,
-				title: title,
-				info: info,  //Used to get info to appear in infoWindow
-				animation: google.maps.Animation.DROP, // Used to make markers drop from the top of the screen
-				id: i,  // Index to relate markers to locations
-				icon: image // Sets icons used to var image (beachflag in this case)
-				});
-
-				markers.push(marker); // Populates marker icons on map
-
-				// PER SPECFICATION: Sets infoWindow to appear when map icon or location list menu item clicked
-				marker.addListener('click', function() { 
-					var marker = this;
-					infoWindow.setContent(  //Defines content in infoWindow using code in line below
-						'<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>'); 
-					infoWindow.open(map, marker); // infoWindow open method
-					this.setAnimation(google.maps.Animation.BOUNCE); // PER SPECFICATION: Sets icon bounce animation
-						setTimeout(function(){ marker.setAnimation(null); }, 1420); // Sets marker animation timeout - 1420 is 2 bounces
-				
+			var marker = new google.maps.Marker({
+					map: map,
+					position: position,
+					title: title,
+					info: info,  //Used to get info to appear in infoWindow
+					animation: google.maps.Animation.DROP, // Used to make markers drop from the top of the screen
+					id: i,  // Index to relate markers to locations
+					icon: image // Sets icons used to var image (beachflag in this case)
 			});
 
+			markers.push(marker); // Populates marker icons on map
+
+			// PER SPECFICATION: Sets infoWindow to appear when map icon or location list menu item clicked
+			marker.addListener('click', function() { 
+				var marker = this;
+				//Defines content in infoWindow using code in line below
+				infoWindow.setContent('<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>'); 
+				infoWindow.open(map, marker); // infoWindow open method
+				this.setAnimation(google.maps.Animation.BOUNCE); // PER SPECFICATION: Sets icon bounce animation
+				setTimeout(function(){ marker.setAnimation(null); }, 1420); // Sets marker animation timeout - 1420 is 2 bounces
+			});
 		}
 
 		infoWindow = new google.maps.InfoWindow(); // Creates new map infoWindows method
-
 		myViewModel = new ViewModel(); // Creates new ViewModel method
-
 		ko.applyBindings(myViewModel);  // Evokes functional use of knockout JS to KO commands
-
-		}
+	}
 
 
