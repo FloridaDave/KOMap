@@ -83,12 +83,11 @@ var locations = [
 var Location = function(location, i){
 		this.title = location.title;
 		this.marker = markers[i];
-
 };
 
 
 
-//*** Viewmodel Section ***
+//*** Viewmodel & Views Section ***
 
 // Location Menu Constructor
 
@@ -100,8 +99,7 @@ var ViewModel = function (){
 	self.myNeighborhood = ko.observableArray();
 	locations.forEach(function(location, i) {
 		self.myNeighborhood.push(new Location(location, i));
-
-	});
+});
 
 
 // Filter items using the filter text (returns matching subset of original array) and connects to markers 
@@ -186,10 +184,10 @@ function initMap(){
 					infoWindow.open(map, marker); // infoWindow open method
 					this.setAnimation(google.maps.Animation.BOUNCE); // Sets icon bounce animation
 						setTimeout(function(){ marker.setAnimation(null); }, 1420); // Sets marker animation timeout - 1420 is 2 bounces
+				
+			});
 
-					
-		});
-			}
+		}
 
 		infoWindow = new google.maps.InfoWindow(); // Creates new map infoWindows method
 
@@ -200,14 +198,3 @@ function initMap(){
 		}
 
 
-	
-	
-	
-	
-
-		 	
-
-
-					
-
-					
