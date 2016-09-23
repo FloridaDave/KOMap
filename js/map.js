@@ -10,71 +10,75 @@ var myViewModel; // Creates myViewModel variable at global level
 // http://www.latlong.net/convert-address-to-lat-long.html
 
 var locations = [ 	
-	{ 'title': 'Where I Live Now',
+	{ 'title': 'Casa Mirella Apartents',
+	  'address': '101 Casa Mirella Way, Windermere, FL 34786',
 	  'latlng': {'lat': 28.526289, 'lng': -81.542796},
-	  'info': 'Casa Mirella Apartments',
-	
+	  'info': 'Where I Live Now',
 	},
 
 	{ 'title': 'Ellie Lou BBQ',
+	  'address': '336 Moore Rd, Ocoee, FL 34761',
 	  'latlng': {'lat': 28.531206, 'lng': -81.539861},
 	  'info': 'Great BBQ Restaurant',
-	  
 	},
 
 	{ 'title': 'Pho-Real',
+	  'address': '2910 Maguire Rd Suite 1006, Ocoee, FL 34761',
 	  'latlng': {'lat': 28.529005, 'lng': -81.541229},
 	  'info': 'Great Vietnamese Restaurant',
-
 	},
 
 	{ 'title': 'Keke Breakfast Cafe',
+	  'address': '282 Moore Rd, Ocoee, FL 34761',
 	  'latlng': {'lat': 28.529887, 'lng': -81.540118},
 	  'info': 'Cool Restaurant for Breakfast',
-	  
+	},
+
+	{ 'title': 'Dixie Cream Cafe',
+	  'address': '434 Main St, Windermere, FL 34786',
+	  'latlng': {'lat': 28.495905, 'lng': -81.535083},
+	  'info': 'Great Place for Breakfast',
 	},
 
 	{ 'title': 'Wells Fargo Bank',
+	  'address': '2630 Maguire RD, Ocoee, FL 34761',
 	  'latlng': {'lat': 28.532100, 'lng': -81.541391},
 	  'info': 'Bank with recent HUGE scandal',
-	  
 	},
 
 	{ 'title': 'Trustco Bank',
+	  'address': '2899 Maguire Rd, Windermere, FL 34786',
 	  'latlng': {'lat': 28.528313, 'lng': -81.542554},
 	  'info': 'Very small bank - looks kind of strange',
-	
 	},
 
 	{ 'title': 'West Orange 5 Theater',
+	  'address': '1575 Maguire Rd #109, Ocoee, FL 34761',
 	  'latlng': {'lat': 28.548660, 'lng': -81.542499},
 	  'info': 'Funky theather with Great Prices',
-	
 	},
 
 	{ 'title': 'AMC West Theater',
+	  'address': '9415 W Colonial Dr, Ocoee, FL 34761',
 	  'latlng': {'lat': 28.551897, 'lng': -81.515219},
 	  'info': 'Theater Chain'
-	 
-	},
-
-	{ 'title': 'George Bailey Park',
-	  'latlng': {'lat': 28.528546, 'lng': -81.556786},
-	  'info': 'Park with Baseball and Soccer Fields',
-
 	},
 
 	{ 'title': 'West Orange Dog Park',
+	  'address': '12400 Marshall Farms Rd, Winter Garden, FL 34787',
 	  'latlng': {'lat': 28.543861, 'lng': -81.564208},
 	  'info': 'Coolest Dog Park in Florida',
-
-	},
-
-	{ 'title': 'Butler Bay Recreation Area',
-	  'latlng': {'lat': 28.505466, 'lng': -81.551895},
-	  'info': 'Great Water Front Park with Tennis',
-	  
 	}
+
+	// { 'title': 'George Bailey Park',
+	//   'latlng': {'lat': 28.528546, 'lng': -81.556786},
+	//   'info': 'Park with Baseball and Soccer Fields',
+	// },
+
+	// { 'title': 'Butler Bay Recreation Area',
+	//   'latlng': {'lat': 28.505466, 'lng': -81.551895},
+	//   'info': 'Great Water Front Park with Tennis',
+	// }
 ];
 	
 
@@ -99,6 +103,11 @@ var ViewModel = function (){
 	self.myNeighborhood = ko.observableArray();
 	locations.forEach(function(location, i) {
 		self.myNeighborhood.push(new Location(location, i));
+
+// Dropdown toggle sample from http://stackoverflow.com/questions/25301661/toggle-a-bootstrap-dropdown-with-knockout-click-binding
+    self.buttonClick = function(){
+        $('.dropdown-toggle').dropdown('toggle');
+    }
 });
 
 
@@ -144,6 +153,12 @@ var ViewModel = function (){
 
 
 // Creates map 
+
+function googleError(){
+		// alert("The Map Cannot Be Loaded At This Time\nPlease Try Later");
+		setTimeout(function(){alert("The Map Cannot Be Loaded At This Time\nPlease Try Later")}, 2500);
+};
+
 
 function initMap(){
 		map = new google.maps.Map(document.getElementById('map'), {  // Code to get map to appear
