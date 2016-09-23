@@ -1,4 +1,6 @@
 //*** Model Section ***
+// Flicker Key: 58d33651bfa9988bc2f1589866f67591
+// Flicker Secret: 7c47911e79bdaa8a
 					
 var map; //Creates map variable at global level
 var infoWindow; // Creates infoWindow variable at global level
@@ -64,9 +66,20 @@ var locations = [
 	  'info': 'Theater Chain'
 	},
 
-	{ 'title': 'West Orange Dog Park',
-	  'address': '12400 Marshall Farms Rd, Winter Garden, FL 34787',
+	// { 'title': 'West Orange Dog Park',
+	//   'address': '12400 Marshall Farms Rd, Winter Garden, FL 34787',
+	//   'latlng': {'lat': 28.543861, 'lng': -81.564208},
+	//   'info': 'Coolest Dog Park in Florida',
+	// },
+
+	{ 'title': 'Disney World',
 	  'latlng': {'lat': 28.543861, 'lng': -81.564208},
+	  'info': 'Coolest Dog Park in Florida',
+	},
+
+	{ 'title': 'Universal Orlando',
+	  'address': '12400 Marshall Farms Rd, Winter Garden, FL 34787',
+	  'latlng': {'lat': 28.543844, 'lng': -81.564255},
 	  'info': 'Coolest Dog Park in Florida',
 	}
 
@@ -166,7 +179,7 @@ function initMap(){
 			zoom: 13  // Sets initial zoom level when the map first appears. 
 		});
 
-// PER SPECFICATION: Loops through array to create and place map icons
+		// PER SPECFICATION: Loops through array to create and place map icons
 
 		for (var i = 0; i < locations.length; i++) {
 
@@ -191,17 +204,69 @@ function initMap(){
 			// PER SPECFICATION: Sets infoWindow to appear when map icon or location list menu item clicked
 			marker.addListener('click', function() { 
 				var marker = this;
+				getWikiData(marker, marker.title);
 				//Defines content in infoWindow using code in line below
-				infoWindow.setContent('<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>'); 
-				infoWindow.open(map, marker); // infoWindow open method
+				// infoWindow.setContent('<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>'); 
+				// infoWindow.open(map, marker); // infoWindow open method
 				this.setAnimation(google.maps.Animation.BOUNCE); // PER SPECFICATION: Sets icon bounce animation
 				setTimeout(function(){ marker.setAnimation(null); }, 1420); // Sets marker animation timeout - 1420 is 2 bounces
 			});
 		}
 
+
+
 		infoWindow = new google.maps.InfoWindow(); // Creates new map infoWindows method
 		myViewModel = new ViewModel(); // Creates new ViewModel method
 		ko.applyBindings(myViewModel);  // Evokes functional use of knockout JS to KO commands
 	}
+
+	getWikiData = function(marker, name) {
+		var wikiQuery;
+
+		// If the wikiRequest times out, then display a message with a link to the Wikipedia page.
+		var wikiRequestTimeout = setTimeout(function() {
+			console.log("failed");
+		}, 4000);
+
+			wikiQuery = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + name + '&srproperties=snippet&format=json&callback=wikiCallback';
+
+			$.ajax({url: wikiQuery,
+				dataType:'jsonp',
+				success: function(data) {
+					console.log(data[2]);
+					var description = data[2];
+
+					var contentString = '<div><h4>' + name + '</h4><p>' + description + '</p></div>';
+                    infoWindow.setContent(contentString);
+                    infoWindow.open(map, marker);
+
+				    clearTimeout(wikiRequestTimeout);
+				}
+			});
+	};
+
+	// getWikiData('', 'Disney World')
+
+
+
+	// function getFlickrImage() {
+
+	// 	var USER_KEY = '58d33651bfa9988bc2f1589866f67591',
+	// 		USER_ID = '7c47911e79bdaa8a';
+
+
+	// 	// Test url string:
+	// 	var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+USER_KEY+'&user_id='+USER_ID+'&text=adnate+numskull&format=json&nojsoncallback=1';
+	// 	$.getJSON(url, function(data) {
+	// 		console.log(data)
+	// 	    var detail = data.photos.photo[0];
+	// 	    var $body = $('body');
+	// 	    $body.append('<img class="infowndw-img" src="https://farm' + detail.farm + '.staticflickr.com/' + detail.server + '/' + detail.id + '_' + detail.secret + '_n.jpg">');
+	// 	}).fail(function(){
+	// 	        $body.append('<p style="text-align: center;">Sorry! The photo</p><p style="text-align: center;">could not be loaded</p>');
+	// 	   });
+	// };
+	
+	// getFlickrImage();
 
 
