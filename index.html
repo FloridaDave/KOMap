@@ -32,46 +32,18 @@
 			<section class="row">
 
 			<!-- Data-binding code example at: http://knockoutjs.com/documentation/binding-context.html -->
-			<!-- Dropdown code example from: http://stackoverflow.com/questions/25301661/toggle-a-bootstrap-dropdown-with-knockout-click-binding -->
 
-			<div class="col-xs-3 col-md-3 dropdown text-left data-bind= text: title" id="myDropdown">
-				<!-- Below for toggle function -->
-				<!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu</a>  took out for test -->
-				<h4><font face="arial" weight="bold">Orlando Attractions</font></h4>
-
-				<h5>Search: <input data-bind="textInput: userInput" /></h5>
-
-					<ul class="dropdown menu" data-bind="foreach: filteredList">
-					    <li>
-					        <span onmouseover="style.color='red'" onmouseout="style.color='black'" data-bind="text: title, click: $root.triggerMarker" style="cursor: pointer"> </span>
-					    </li>
-					</ul>
-					<!-- for toggle menu  -->
-					<button data-bind="click: buttonClick, clickBubble: false">Button</button>
-		
-
-				<div id="weather_contitions"></div>
-    				<h4><font face="arial" weight="bold">Weather Conditions</font></h4>
-						<ul>
-							<li>Weather: <span id="weather">
-							<li>Current Temp: <span id="temp">
-							<li>Current Wind MPH: <span id="wind">
-							<li>Current Humidity: <span id="humidity">
+				<div class="col-xs-3 col-md-3 text-left data-bind= text: title" id="myTextBox">
+					<h4><font face="arial" weight="bold">Orlando Attractions</font></h4>
+					<h5>Search: <input data-bind="textInput: userInput" /></h5>
+						<ul class="dropdown menu" data-bind="foreach: filteredList">
+						    <li>
+						        <span onmouseover="style.color='red'" onmouseout="style.color='black'" data-bind="text: title, click: $root.triggerMarker" style="cursor: pointer"> </span>
+						    </li>
 						</ul>
-					<img class="uw-logo" src="img/wu.png" alt="UW Logo">
-					<h6><em>Courtesy Weather Underground</h6>
-			</div>
-			
-				<div class="col-md-9" id="map">
-					   
-			</div>
-
-			</section>
-			<section>
-
-			<div class="row text-left">
-				<h4 class="col-md-12"></h6>
-			</div>
+				</div>
+					<div class="col-md-9" id="map">	   
+				</div>
 
 			</section>
 

@@ -236,7 +236,7 @@ function initMap(){
 					console.log(data[2]);
 					var description = data[2];
 
-					var contentString = '<div><h4>' + name + '</h4><p>' + description + '</p></div>';
+					var contentString = '<div><h5>' + name + '</h5><p>' + description + '</p></div>';
                     infoWindow.setContent(contentString);
                     infoWindow.open(map, marker);
 
