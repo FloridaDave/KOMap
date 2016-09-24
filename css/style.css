@@ -71,6 +71,15 @@ hr {
 	height: 500px;
 }
 
+.infoWindow {
+	width: 200px;
+	max-width: 100%;
+}
+
+.message {
+	color: red;
+}
+
 #myTextBox input
 {
     width:60%;

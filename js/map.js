@@ -1,6 +1,4 @@
 //*** Model Section ***
-// Flicker Key: 58d33651bfa9988bc2f1589866f67591
-// Flicker Secret: 7c47911e79bdaa8a
 					
 var map; //Creates map variable at global level
 var infoWindow; // Creates infoWindow variable at global level
@@ -10,89 +8,62 @@ var myViewModel; // Creates myViewModel variable at global level
 // PER SPECFICATION: Defines hardcoded array of location objects (at least 5). 
 // Locations chosen from places near where I live and used latlng converter at:
 // http://www.latlong.net/convert-address-to-lat-long.html
-// Titles used double quotes to allow for apostrophes
+// Note: Titles used double quotes to allow for apostrophes
 
 var locations = [ 	
 	{ 'title': "Disney World",
 	  'address': 'Walt Disney World Resort, Orlando, FL 32830',
 	  'latlng': {'lat': 28.392155, 'lng': -81.532215},
-	  'info': 'Happiest Place on Earth',
+	  'info': 'Info Courtesy Wikipedia',
 	},
 
 	{ 'title': "Sea World Orlando",
 	  'address': '7007 Sea World Dr, Orlando, FL 32821',
 	  'latlng': {'lat': 28.411194, 'lng': -81.461739},
-	  'info': 'Great BBQ Restaurant',
+	  'info': 'Info Courtesy Wikipedia',
 	},
 
 	{ 'title': "Universal Orlando",
 	  'address': '6000 Universal Blvd, Orlando, FL 32819',
 	  'latlng': {'lat': 28.473060, 'lng': -81.461958},
-	  'info': 'Great Vietnamese Restaurant',
+	  'info': 'Info Courtesy Wikipedia',
 	},
 
 	{ 'title': "Discovery Cove",
 	  'address': '6000 Discovery Cove Way, Orlando, FL 32821',
 	  'latlng': {'lat': 28.405421, 'lng': -81.461584},
-	  'info': 'Cool Restaurant for Breakfast',
+	  'info': 'Info Courtesy Wikipedia',
 	},
 
 	{ 'title': "Disney's Animal Kingdom",
 	  'address': '2901 Osceola Pkwy, Orlando, FL 32830',
 	  'latlng': {'lat': 28.352395, 'lng': -81.603652},
-	  'info': 'Great Place for Breakfast',
+	  'info': 'Info Courtesy Wikipedia',
 	},
 
 	{ 'title': "Wet n Wild Orlando",
 	  'address': '6200 International Dr, Orlando, FL 32819',
 	  'latlng': {'lat': 28.461355, 'lng': -81.465361},    
-	  'info': 'Bank with recent HUGE scandal',
+	  'info': 'Info Courtesy Wikipedia',
 	},
 
 	{ 'title': "Holy Land Experience",
 	  'address': '4655 Vineland Rd, Orlando, FL 32811',
 	  'latlng': {'lat': 28.495742, 'lng': -81.432944},
-	  'info': 'Very small bank - looks kind of strange',
+	  'info': 'Info Courtesy Wikipedia',
 	},
 
 	{ 'title': "Orlando Science Center",
 	  'address': '777 E Princeton St, Orlando, FL 32803',
 	  'latlng': {'lat': 28.572279, 'lng': -81.368362},
-	  'info': 'Funky theather with Great Prices',
+	  'info': 'Info Courtesy Wikipedia',
 	},
 
 	{ 'title': "Harry P. Leu Gardens",
 	  'address': '1920 N Forest Ave, Orlando, FL 32803',
 	  'latlng': {'lat': 28.569718, 'lng': -81.356347},
-	  'info': 'Theater Chain'
-	},
-
-	// { 'title': 'West Orange Dog Park',
-	//   'address': '12400 Marshall Farms Rd, Winter Garden, FL 34787',
-	//   'latlng': {'lat': 28.543861, 'lng': -81.564208},
-	//   'info': 'Coolest Dog Park in Florida',
-	// },
-
-	// { 'title': 'Disney World',
-	//   'latlng': {'lat': 28.543861, 'lng': -81.564208},
-	//   'info': 'Coolest Dog Park in Florida',
-	// },
-
-	// { 'title': 'Universal Orlando',
-	//   'address': '12400 Marshall Farms Rd, Winter Garden, FL 34787',
-	//   'latlng': {'lat': 28.543844, 'lng': -81.564255},
-	//   'info': 'Coolest Dog Park in Florida',
-	// }
-
-	// { 'title': 'George Bailey Park',
-	//   'latlng': {'lat': 28.528546, 'lng': -81.556786},
-	//   'info': 'Park with Baseball and Soccer Fields',
-	// },
-
-	// { 'title': 'Butler Bay Recreation Area',
-	//   'latlng': {'lat': 28.505466, 'lng': -81.551895},
-	//   'info': 'Great Water Front Park with Tennis',
-	// }
+	  'info': 'Info Courtesy Wikipedia'
+	}
 ];
 	
 
@@ -105,7 +76,6 @@ var Location = function(location, i){
 };
 
 
-
 //*** ViewModel & Views Section ***
 // PER SPECFICATION: Location Menu Constructor
 
@@ -114,14 +84,11 @@ var ViewModel = function (){
 
 	self.userInput = ko.observable('');
 
+	self.message = ko.observable('');
+
 	self.myNeighborhood = ko.observableArray();
 	locations.forEach(function(location, i) {
 		self.myNeighborhood.push(new Location(location, i));
-
-// Dropdown toggle sample from http://stackoverflow.com/questions/25301661/toggle-a-bootstrap-dropdown-with-knockout-click-binding
-    self.buttonClick = function(){
-        $('.dropdown-toggle').dropdown('toggle');
-    }
 });
 
 
@@ -170,7 +137,7 @@ var ViewModel = function (){
 
 function googleError(){
 		// alert("The Map Cannot Be Loaded At This Time\nPlease Try Later");
-		setTimeout(function(){alert("The Map Cannot Be Loaded At This Time\nPlease Try Later")}, 2500);
+		setTimeout(function(){alert("Google Maps API Cannot Be Loaded At This Time.\nPlease Try Later.")}, 2500);
 };
 
 
@@ -223,13 +190,16 @@ function initMap(){
 
 
 	// Function to get wikipedia request and include in infoWindow to meet 3rd party API requirement.
+	// Code example taken from course material at: https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/271165859175460/lessons/3174548544/concepts/31744191770923
 	getWikiData = function(marker, name) {
 		var wikiQuery;
 
 		// If the wikiRequest times out, then display a message with a link to the Wikipedia page.
 		var wikiRequestTimeout = setTimeout(function() {
-			console.log("No Information Is Available At This Time");
-		}, 4000);
+			console.log("Wikipedia API could not be reached");
+			var vm = ko.dataFor(document.body);
+			vm.message('<em class="message">Wikipedia API could not be reached</em>');
+		}, 3000);
 
 			wikiQuery = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + name + '&srproperties=snippet&format=json&callback=wikiCallback';
 
@@ -239,7 +209,7 @@ function initMap(){
 					console.log(data[2]);
 					var description = data[2];
 
-					var contentString = '<div><h5>' + name + '</h5><p>' + description + '</p></div>';
+					var contentString = '<div class="infoWindow"><h5>' + name + '</h5><p>' + description + '</p></div>';
                     infoWindow.setContent(contentString);
                     infoWindow.open(map, marker);
 
@@ -248,28 +218,5 @@ function initMap(){
 			});
 	};
 
-	// getWikiData('', 'Disney World')
-
-
-
-	// function getFlickrImage() {
-
-	// 	var USER_KEY = '58d33651bfa9988bc2f1589866f67591',
-	// 		USER_ID = '147473459@N08';
-
-
-	// 	// Test url string:
-	// 	var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+USER_KEY+'&user_id='+USER_ID+'&text=adnate+numskull&format=json&nojsoncallback=1';
-	// 	$.getJSON(url, function(data) {
-	// 		console.log(data)
-	// 	    var detail = data.photos.photo[0];
-	// 	    var $body = $('body');
-	// 	    $body.append('<img class="infowndw-img" src="https://farm' + detail.farm + '.staticflickr.com/' + detail.server + '/' + detail.id + '_' + detail.secret + '_n.jpg">');
-	// 	}).fail(function(){
-	// 	        $body.append('<p style="text-align: center;">Sorry! The photo</p><p style="text-align: center;">could not be loaded</p>');
-	// 	   });
-	// };
-	
-	// getFlickrImage();
 
 

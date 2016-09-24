@@ -31,7 +31,7 @@
 
 			<section class="row">
 
-			<!-- Data-binding code example at: http://knockoutjs.com/documentation/binding-context.html -->
+				<!-- Data-binding code example at: http://knockoutjs.com/documentation/binding-context.html -->
 
 				<div class="col-xs-3 col-md-3 text-left data-bind= text: title" id="myTextBox">
 					<h4><font face="arial" weight="bold">Orlando Attractions</font></h4>
@@ -41,6 +41,9 @@
 						        <span onmouseover="style.color='red'" onmouseout="style.color='black'" data-bind="text: title, click: $root.triggerMarker" style="cursor: pointer"> </span>
 						    </li>
 						</ul>
+					<div><p>Attraction Details From Wikipedia</div>
+					<!-- Wikipedia error handling -->
+					<div data-bind="html: message"></div>
 				</div>
 					<div class="col-md-9" id="map">	   
 				</div>
