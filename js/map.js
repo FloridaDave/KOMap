@@ -173,15 +173,10 @@ function initMap(){
 			marker.addListener('click', function() { 
 				var marker = this;
 				getWikiData(marker, marker.title);
-				//Defines content in infoWindow using code in line below
-				// infoWindow.setContent('<div><strong>' + marker.title + '</strong><br>' + marker.info + '</div>'); 
-				// infoWindow.open(map, marker); // infoWindow open method
 				this.setAnimation(google.maps.Animation.BOUNCE); // PER SPECFICATION: Sets icon bounce animation
 				setTimeout(function(){ marker.setAnimation(null); }, 1420); // Sets marker animation timeout - 1420 is 2 bounces
 			});
 		}
-
-
 
 		infoWindow = new google.maps.InfoWindow(); // Creates new map infoWindows method
 		myViewModel = new ViewModel(); // Creates new ViewModel method
@@ -190,7 +185,9 @@ function initMap(){
 
 
 	// Function to get wikipedia request and include in infoWindow to meet 3rd party API requirement.
-	// Code example taken from course material at: https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/271165859175460/lessons/3174548544/concepts/31744191770923
+	// Code example taken from course material at: 
+	// https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/271165859175460/lessons/3174548544/concepts/31744191770923
+	
 	getWikiData = function(marker, name) {
 		var wikiQuery;
 
@@ -198,8 +195,9 @@ function initMap(){
 		var wikiRequestTimeout = setTimeout(function() {
 			console.log("Wikipedia API could not be reached");
 			var vm = ko.dataFor(document.body);
+			// Creates message to be displayed if API cannot be reached
 			vm.message('<em class="message">Wikipedia API could not be reached</em>');
-		}, 3000);
+		}, 3000); //3000 sets error handling message to be displayed after 3 seconds
 
 			wikiQuery = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + name + '&srproperties=snippet&format=json&callback=wikiCallback';
 
@@ -213,7 +211,7 @@ function initMap(){
                     infoWindow.setContent(contentString);
                     infoWindow.open(map, marker);
 
-				    clearTimeout(wikiRequestTimeout);
+				    clearTimeout(wikiRequestTimeout); // Disables error handling if API information returned. 
 				}
 			});
 	};
