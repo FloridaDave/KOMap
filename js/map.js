@@ -10,57 +10,58 @@ var myViewModel; // Creates myViewModel variable at global level
 // PER SPECFICATION: Defines hardcoded array of location objects (at least 5). 
 // Locations chosen from places near where I live and used latlng converter at:
 // http://www.latlong.net/convert-address-to-lat-long.html
+// Titles used double quotes to allow for apostrophes
 
 var locations = [ 	
-	{ 'title': 'Disney World',
+	{ 'title': "Disney World",
 	  'address': 'Walt Disney World Resort, Orlando, FL 32830',
 	  'latlng': {'lat': 28.392155, 'lng': -81.532215},
 	  'info': 'Happiest Place on Earth',
 	},
 
-	{ 'title': 'Sea World Orlando',
+	{ 'title': "Sea World Orlando",
 	  'address': '7007 Sea World Dr, Orlando, FL 32821',
 	  'latlng': {'lat': 28.411194, 'lng': -81.461739},
 	  'info': 'Great BBQ Restaurant',
 	},
 
-	{ 'title': 'Universal Orlando',
+	{ 'title': "Universal Orlando",
 	  'address': '6000 Universal Blvd, Orlando, FL 32819',
 	  'latlng': {'lat': 28.473060, 'lng': -81.461958},
 	  'info': 'Great Vietnamese Restaurant',
 	},
 
-	{ 'title': 'Discovery Cove',
+	{ 'title': "Discovery Cove",
 	  'address': '6000 Discovery Cove Way, Orlando, FL 32821',
 	  'latlng': {'lat': 28.405421, 'lng': -81.461584},
 	  'info': 'Cool Restaurant for Breakfast',
 	},
 
-	{ 'title': 'Disney Animal Kingdom',
+	{ 'title': "Disney's Animal Kingdom",
 	  'address': '2901 Osceola Pkwy, Orlando, FL 32830',
 	  'latlng': {'lat': 28.352395, 'lng': -81.603652},
 	  'info': 'Great Place for Breakfast',
 	},
 
-	{ 'title': 'Wet n Wild Orlando',
+	{ 'title': "Wet n Wild Orlando",
 	  'address': '6200 International Dr, Orlando, FL 32819',
 	  'latlng': {'lat': 28.461355, 'lng': -81.465361},    
 	  'info': 'Bank with recent HUGE scandal',
 	},
 
-	{ 'title': 'Holy Land Experience',
+	{ 'title': "Holy Land Experience",
 	  'address': '4655 Vineland Rd, Orlando, FL 32811',
 	  'latlng': {'lat': 28.495742, 'lng': -81.432944},
 	  'info': 'Very small bank - looks kind of strange',
 	},
 
-	{ 'title': 'Orlando Science Center',
+	{ 'title': "Orlando Science Center",
 	  'address': '777 E Princeton St, Orlando, FL 32803',
 	  'latlng': {'lat': 28.572279, 'lng': -81.368362},
 	  'info': 'Funky theather with Great Prices',
 	},
 
-	{ 'title': 'Harry P. Leu Gardens',
+	{ 'title': "Harry P. Leu Gardens",
 	  'address': '1920 N Forest Ave, Orlando, FL 32803',
 	  'latlng': {'lat': 28.569718, 'lng': -81.356347},
 	  'info': 'Theater Chain'
@@ -220,12 +221,14 @@ function initMap(){
 		ko.applyBindings(myViewModel);  // Evokes functional use of knockout JS to KO commands
 	}
 
+
+	// Function to get wikipedia request and include in infoWindow to meet 3rd party API requirement.
 	getWikiData = function(marker, name) {
 		var wikiQuery;
 
 		// If the wikiRequest times out, then display a message with a link to the Wikipedia page.
 		var wikiRequestTimeout = setTimeout(function() {
-			console.log("failed");
+			console.log("No Information Is Available At This Time");
 		}, 4000);
 
 			wikiQuery = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + name + '&srproperties=snippet&format=json&callback=wikiCallback';
@@ -252,7 +255,7 @@ function initMap(){
 	// function getFlickrImage() {
 
 	// 	var USER_KEY = '58d33651bfa9988bc2f1589866f67591',
-	// 		USER_ID = '7c47911e79bdaa8a';
+	// 		USER_ID = '147473459@N08';
 
 
 	// 	// Test url string:
