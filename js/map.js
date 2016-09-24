@@ -12,57 +12,57 @@ var myViewModel; // Creates myViewModel variable at global level
 // http://www.latlong.net/convert-address-to-lat-long.html
 
 var locations = [ 	
-	{ 'title': 'Casa Mirella Apartents',
-	  'address': '101 Casa Mirella Way, Windermere, FL 34786',
-	  'latlng': {'lat': 28.526289, 'lng': -81.542796},
-	  'info': 'Where I Live Now',
+	{ 'title': 'Disney World',
+	  'address': 'Walt Disney World Resort, Orlando, FL 32830',
+	  'latlng': {'lat': 28.392155, 'lng': -81.532215},
+	  'info': 'Happiest Place on Earth',
 	},
 
-	{ 'title': 'Ellie Lou BBQ',
-	  'address': '336 Moore Rd, Ocoee, FL 34761',
-	  'latlng': {'lat': 28.531206, 'lng': -81.539861},
+	{ 'title': 'Sea World Orlando',
+	  'address': '7007 Sea World Dr, Orlando, FL 32821',
+	  'latlng': {'lat': 28.411194, 'lng': -81.461739},
 	  'info': 'Great BBQ Restaurant',
 	},
 
-	{ 'title': 'Pho-Real',
-	  'address': '2910 Maguire Rd Suite 1006, Ocoee, FL 34761',
-	  'latlng': {'lat': 28.529005, 'lng': -81.541229},
+	{ 'title': 'Universal Orlando',
+	  'address': '6000 Universal Blvd, Orlando, FL 32819',
+	  'latlng': {'lat': 28.473060, 'lng': -81.461958},
 	  'info': 'Great Vietnamese Restaurant',
 	},
 
-	{ 'title': 'Keke Breakfast Cafe',
-	  'address': '282 Moore Rd, Ocoee, FL 34761',
-	  'latlng': {'lat': 28.529887, 'lng': -81.540118},
+	{ 'title': 'Discovery Cove',
+	  'address': '6000 Discovery Cove Way, Orlando, FL 32821',
+	  'latlng': {'lat': 28.405421, 'lng': -81.461584},
 	  'info': 'Cool Restaurant for Breakfast',
 	},
 
-	{ 'title': 'Dixie Cream Cafe',
-	  'address': '434 Main St, Windermere, FL 34786',
-	  'latlng': {'lat': 28.495905, 'lng': -81.535083},
+	{ 'title': 'Disney Animal Kingdom',
+	  'address': '2901 Osceola Pkwy, Orlando, FL 32830',
+	  'latlng': {'lat': 28.352395, 'lng': -81.603652},
 	  'info': 'Great Place for Breakfast',
 	},
 
-	{ 'title': 'Wells Fargo Bank',
-	  'address': '2630 Maguire RD, Ocoee, FL 34761',
-	  'latlng': {'lat': 28.532100, 'lng': -81.541391},
+	{ 'title': 'Wet n Wild Orlando',
+	  'address': '6200 International Dr, Orlando, FL 32819',
+	  'latlng': {'lat': 28.461355, 'lng': -81.465361},    
 	  'info': 'Bank with recent HUGE scandal',
 	},
 
-	{ 'title': 'Trustco Bank',
-	  'address': '2899 Maguire Rd, Windermere, FL 34786',
-	  'latlng': {'lat': 28.528313, 'lng': -81.542554},
+	{ 'title': 'Holy Land Experience',
+	  'address': '4655 Vineland Rd, Orlando, FL 32811',
+	  'latlng': {'lat': 28.495742, 'lng': -81.432944},
 	  'info': 'Very small bank - looks kind of strange',
 	},
 
-	{ 'title': 'West Orange 5 Theater',
-	  'address': '1575 Maguire Rd #109, Ocoee, FL 34761',
-	  'latlng': {'lat': 28.548660, 'lng': -81.542499},
+	{ 'title': 'Orlando Science Center',
+	  'address': '777 E Princeton St, Orlando, FL 32803',
+	  'latlng': {'lat': 28.572279, 'lng': -81.368362},
 	  'info': 'Funky theather with Great Prices',
 	},
 
-	{ 'title': 'AMC West Theater',
-	  'address': '9415 W Colonial Dr, Ocoee, FL 34761',
-	  'latlng': {'lat': 28.551897, 'lng': -81.515219},
+	{ 'title': 'Harry P. Leu Gardens',
+	  'address': '1920 N Forest Ave, Orlando, FL 32803',
+	  'latlng': {'lat': 28.569718, 'lng': -81.356347},
 	  'info': 'Theater Chain'
 	},
 
@@ -72,16 +72,16 @@ var locations = [
 	//   'info': 'Coolest Dog Park in Florida',
 	// },
 
-	{ 'title': 'Disney World',
-	  'latlng': {'lat': 28.543861, 'lng': -81.564208},
-	  'info': 'Coolest Dog Park in Florida',
-	},
+	// { 'title': 'Disney World',
+	//   'latlng': {'lat': 28.543861, 'lng': -81.564208},
+	//   'info': 'Coolest Dog Park in Florida',
+	// },
 
-	{ 'title': 'Universal Orlando',
-	  'address': '12400 Marshall Farms Rd, Winter Garden, FL 34787',
-	  'latlng': {'lat': 28.543844, 'lng': -81.564255},
-	  'info': 'Coolest Dog Park in Florida',
-	}
+	// { 'title': 'Universal Orlando',
+	//   'address': '12400 Marshall Farms Rd, Winter Garden, FL 34787',
+	//   'latlng': {'lat': 28.543844, 'lng': -81.564255},
+	//   'info': 'Coolest Dog Park in Florida',
+	// }
 
 	// { 'title': 'George Bailey Park',
 	//   'latlng': {'lat': 28.528546, 'lng': -81.556786},
@@ -175,8 +175,8 @@ function googleError(){
 
 function initMap(){
 		map = new google.maps.Map(document.getElementById('map'), {  // Code to get map to appear
-			center: {lat: 28.526289, lng: -81.542796}, // Sets location for center of map in DOM
-			zoom: 13  // Sets initial zoom level when the map first appears. 
+			center: {lat: 28.471194, lng: -81.465361}, // Sets location for center of map in DOM
+			zoom: 11  // Sets initial zoom level when the map first appears. 
 		});
 
 		// PER SPECFICATION: Loops through array to create and place map icons
