@@ -187,6 +187,7 @@ function initMap(){
 	// Function to get wikipedia request and include in infoWindow to meet 3rd party API requirement.
 	// Code example taken from course material at: 
 	// https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/271165859175460/lessons/3174548544/concepts/31744191770923
+	// as well as from Udacity forums including: https://discussions.udacity.com/t/wikimedia-api-wikipedia-problem/21176/27
 	
 	getWikiData = function(marker, name) {
 		var wikiQuery;
